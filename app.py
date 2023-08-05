@@ -1,5 +1,5 @@
 import streamlit as st
-from fuzzywuzzy import fuzz
+
 import json
 from random import randint
 from numpy import array
@@ -118,22 +118,6 @@ def main():
         elif user_input == 'afficher':
             if st.button("Run code"):
                 st.code("bacmath")
-    else:
-        # Find the closest matching word
-        closest_word, similarity_score = find_closest_word(user_input, algorithm_data)
-        closest_word_exe, max_similarity_exe = get_example(user_input, definition)
-        if closest_word and similarity_score or closest_word_exe and max_similarity_exe > 60 :  
-            st.info(f"Did you mean '{closest_word}'? (Similarity: {similarity_score}%)")
-            st.code(algorithm_data["Algorithms"][closest_word])
-            st.code(definition["Algorithms_exe"][closest_word_exe])
-            if closest_word_exe == 'lire()' and st.checkbox("test code"):
-                test = st.text_input("Exemple: ","")
-                if st.button("Run code"):
-                    st.code(f"Output: {test}")
-            else:
-                pass
-        else:
-            st.warning("Algorithm not found. Please try a different input.")
     
     st.markdown("[Learn Qt Designer](#soon)")
     st.write("Free Research Preview. [Algorithm.ai August 4 Version](#).")
